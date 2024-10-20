@@ -1,0 +1,20 @@
+1. Download and install Docker in your instances using following commands :-
+    
+sudo apt-get update
+sudo apt-get install docker.io
+
+2. then make a directory named loan calculator and write a Dockerfile in it using the dockerfile.
+3. the make an app.py file.
+4. write a html file in templates folder.
+5. write a css file in static folder.
+6. build the docker image using command :-
+
+docker build -t flask-loan-calculator .
+
+7. build and run the container using command :-
+
+docker run -d -p 5000:5000 flask-loan-calculator
+
+8. make sure you have exposed the port using tcp using security group in your instances in aws.
+
+9. copy your public ip address and expose the 5000 port to open it.

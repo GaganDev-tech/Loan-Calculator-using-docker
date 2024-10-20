@@ -1,0 +1,33 @@
+from flask import Flask, jsonify, render_template, request
+
+app = Flask(__name__)
+
+# API Route to check if the server is up and running
+@app.route('/api/status')
+def status():
+    return jsonify({"message": "Server is up and running!"})
+
+# Home Route for Loan Calculator
+@app.route('/')
+def loan_calculator():
+    return render_template('loan_calculator.html')
+
+# Calculate Loan Payment
+@app.route('/calculate', methods=['POST'])
+def calculate():
+    loan_amount = float(request.form['loan_amount'])
+    interest_rate = float(request.form['interest_rate'])
+    years = int(request.form['years'])
+
+    # Monthly interest rate
+    monthly_interest_rate = interest_rate / 100 / 12
+    # Total number of payments
+    total_payments = years * 12
+
+    # Formula to calculate monthly payment
+    monthly_payment = (loan_amount * monthly_interest_rate) / (1 - (1 + monthly_interest_rate) ** -total_payments)
+
+    return render_template('loan_calculator.html', monthly_payment=round(monthly_payment, 2))
+
+if __name__ == "__main__":
+    app.run(debug=True)
