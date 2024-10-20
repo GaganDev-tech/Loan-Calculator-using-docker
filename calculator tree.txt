@@ -1,0 +1,6 @@
+loan_calculator/
+├── app.py
+├── templates/
+    └── loan_calculator.html
+└── static/
+    └── style.css
